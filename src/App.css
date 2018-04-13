@@ -1,0 +1,188 @@
+.App {
+  text-align: center;
+  align-content: center;
+}
+
+.Flex{
+  display: flex;
+  
+}
+
+.MenuLateral{
+  width: 18%;
+  background: rgba(231, 231, 231, 0.288);
+}
+
+.Conteudo{
+  width: 58%;
+  background: rgba(231, 231, 231, 0.288);
+  height: 100%
+}
+
+.Comentarios{
+  width: 24%;
+  background: rgba(231, 231, 231, 0.288);
+}
+/* Estilos do Menu lateral esquerdo */
+.App-menu{
+  padding: 20px;
+  background: white;
+  height: 100%;
+  position: fixed;
+  width: 18%;
+  top: 0;
+  box-shadow: 2px 1px 10px grey;
+}
+
+
+
+/* opçoes */
+
+.Menu-options-size{
+    width: 90%;
+    
+}
+
+.Menu-botoes{
+  height: 100%;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  
+}
+
+.Botoes-menu{
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 3px;
+  margin-top: 10px;
+  height: auto;
+}
+
+.Menu-options {
+  font-size: 20px;
+  border-color: #222;
+  color: black;
+  padding: 10px;
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+}
+
+.Menu-options:hover {
+  transition: 0.5s;
+  color: black;
+}
+
+.Menu-options:focus {
+  outline: 0;
+  color: black;
+}
+
+/* sub-opçoes */
+
+.SubMenu-options {
+  font-size: 15px;
+  color: grey;
+  padding: 15px 26%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.SubMenu-options:hover {
+  transition: 1s;
+  color: black;
+}
+
+.SubMenu-options:focus {
+  outline: 0;
+  color: black;
+}
+
+/* Estilos do Lateral direito(Comentários) */
+
+.App-comentarios{
+  overflow-y: scroll;
+  background: rgba(231, 231, 231, 0.288);
+  height: 100%;
+  position: fixed;
+  color: black;
+  width: 24%;
+  box-shadow: 0px 1px 10px black;
+}
+
+.Comentarios-menu{
+  background-color: rgba(231, 231, 231, 0.288);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+}
+
+.Comentarios-menu-itens{
+  padding-top: 10px;
+  padding-left: 2px;
+}
+
+
+
+.Comentarios-conteudo{
+  width: 80%;
+  margin-left: 60px;
+}
+
+.Comentarios-close{
+  position: fixed;
+  right: 15px;
+  z-index: 2;
+  top: 5px;
+}
+
+.Comentarios-add{
+  top: 30px;
+  position: fixed;
+  z-index: 2;
+}
+.Comentarios-add-style{
+  background-color: #222;
+  border-color: #222;
+  color: grey;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 15px;
+  padding: 5px;
+}
+.Comentarios-add-style:hover {
+  transition: 0.5s;
+  color: white;
+}
+
+.Comentarios-add-style:focus {
+  outline: 0;
+  color: white;
+}
+
+
+/* Estilos dos conteudos do body */
+
+.App-intro {
+  font-size: large;
+}
+
+/* Divider */
+
+.Divider {
+  width: 100%;
+}
+
+/* Posts */
+
+
+
+.Posts {
+  margin: auto;
+  width: 90%;
+  padding: 5px;
+}
