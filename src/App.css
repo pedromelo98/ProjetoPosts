@@ -186,3 +186,10 @@
   width: 90%;
   padding: 5px;
 }
+
+/* Modal add post */
+
+ .Postadd{
+   padding-right: 50px;
+   padding-left: 50px;
+ }

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../App.css';
 import { connect } from 'react-redux'
 import { mudaCategorie } from '../actions/CategoriesActions'
-import * as PostsAPI from '../utils/PostsAPI'
 import TodosPosts from './TodosPosts'
 import ExibeCategoria from './ExibeCategoria'
-import { Sidebar, Menu, Segment } from 'semantic-ui-react'
 
 
 class Categorias extends Component {
@@ -22,10 +19,9 @@ class Categorias extends Component {
     renderizaCategoriaChamada() {
         switch (this.state.categoria) {
             case '':
-                return <TodosPosts />
-                break
+                return <TodosPosts/>
             default:
-                return <ExibeCategoria />
+                return <ExibeCategoria/>
         }
     }
 

@@ -1,4 +1,3 @@
-import * as CategoriesAPI from '../utils/CategoriesAPI'
 
 export const renderizaSubCategorie = (boolean) => {
     return {

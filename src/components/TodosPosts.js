@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import { connect } from 'react-redux'
 import * as PostsAPI from '../utils/PostsAPI'
-import { Button, Segment, Divider, Header, Icon, Sidebar, Menu, Pagination, Confirm } from 'semantic-ui-react'
+import { Button, Segment, Divider, Header, Icon, Confirm } from 'semantic-ui-react'
 import { renderizaComentarios, mudaIdDoPai } from '../actions/ComentariosActions'
 import { mudaCategorie } from '../actions/CategoriesActions'
 import { novoPost, mudaAddPost, mudaTitle, mudaBody, mudaValueCategoria, mudaEditPost, mudaId, mudaTime, deletarPost, votarPost, mudaOrdenados } from '../actions/PostsActions'
@@ -21,7 +21,7 @@ class TodosPosts extends Component {
         if (postid === this.state.divid) {
             return 'blue'
         }
-        return ''
+        return 'black'
     }
 
     populaTodosOsPosts() {
@@ -32,7 +32,7 @@ class TodosPosts extends Component {
     }
 
     corDosVotos(numeroDeVotos) {
-        if (numeroDeVotos == 0) {
+        if (numeroDeVotos === 0) {
             return ('yellow')
         } else if (numeroDeVotos < 0) {
             return ('red')
@@ -55,13 +55,10 @@ class TodosPosts extends Component {
         switch (this.props.ordenar) {
             case 'curtidos':
                 return posts.sort((a, b) => a.voteScore < b.voteScore)
-                break
             case 'comentados':
                 return posts.sort((a, b) => a.commentCount < b.commentCount)
-                break
             default:
                 return posts.sort((a, b) => a.timestamp < b.timestamp)
-                break
         }
     }
 
@@ -88,8 +85,8 @@ class TodosPosts extends Component {
                                 />
                                 <Button onClick={() => { this.props.mudaAddPost(true); this.props.mudaTitle(post.title); this.props.mudaBody(post.body); this.props.mudaValueCategoria(post.category); this.props.mudaEditPost(true); this.props.mudaId(post.id); this.props.mudaTime(post.timestamp) }} basic icon floated='right'><Icon name='pencil' /></Button>
                                 <Divider clearing />
+                                <Header as='h5' textAlign='left' ><Icon name='user' />@{post.author}:</Header><br />
                                 <Header as='h4' textAlign='left'>
-                                    <Header as='h5' textAlign='left' ><Icon name='user' />@{post.author}:</Header><br />
                                     <p>{post.body}</p>
                                 </Header>
                                 <Divider clearing />

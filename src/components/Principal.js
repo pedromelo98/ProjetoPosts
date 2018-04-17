@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../App.css';
-import * as CategoriesAPI from '../utils/CategoriesAPI'
 import { connect } from 'react-redux'
 import MenuLateral from './MenuLateral'
 import Categorias from './Categorias'

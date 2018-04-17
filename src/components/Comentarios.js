@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import '../App.css';
-import * as CategoriesAPI from '../utils/CategoriesAPI'
 import { connect } from 'react-redux'
-import MenuLateral from './MenuLateral'
-import Categorias from './Categorias'
 import * as ComentariosAPI from '../utils/ComentariosAPI'
 import { renderizaComentarios, mudaTa, addComentario, novoComentario, deletarComentario, editarComentario, mudaEdit, votarComentario, mudaOrdenados } from '../actions/ComentariosActions'
-import { Sidebar, Menu, Segment, Header, Button, Icon, Input, Dropdown, Accordion, Divider, Transition, Form, TextArea, Popup, Label, Confirm } from 'semantic-ui-react'
+import { Segment, Header, Button, Icon, Divider, Transition, Form, TextArea, Popup, Confirm } from 'semantic-ui-react'
 
 
 class Principal extends Component {
@@ -59,7 +56,7 @@ class Principal extends Component {
     }
 
     corDosVotos(numeroDeVotos) {
-        if (numeroDeVotos == 0) {
+        if (numeroDeVotos === 0) {
             return ('yellow')
         } else if (numeroDeVotos < 0) {
             return ('red')
@@ -71,10 +68,8 @@ class Principal extends Component {
         switch (this.props.ordemcomentarios) {
             case 'curtidos':
                 return comentarios.sort((a, b) => a.voteScore < b.voteScore)
-                break
             default:
                 return comentarios.sort((a, b) => a.timestamp < b.timestamp)
-                break
         }
     }
 
@@ -83,7 +78,7 @@ class Principal extends Component {
         if (this.state.comments[0]) {
             return (
                 this.state.comments.slice(0).map((comentario, index) => {
-                    return (<div id={comentario.id} >
+                    return (<div key={comentario.id} id={comentario.id} >
                         <Divider horizontal ><Header as='h5' textAlign='left'>{new Date(comentario.timestamp).toLocaleDateString() + " ás " + new Date(comentario.timestamp).toLocaleTimeString()}</Header></Divider>
                         <Segment>
                             <Button onClick={() => this.setState({ confirm: true, id: comentario.id })} basic icon size='tiny' floated='right' ><Icon name='close' /></Button>
@@ -96,10 +91,10 @@ class Principal extends Component {
                                 onConfirm={() => { this.props.deletarComentario(this.state.id); this.setState({ confirm: false }) }}
                             />
                             <Button onClick={() => this.setState({ editar: !this.state.editar, comentarioid: comentario.id })} basic icon size='tiny' floated='right' ><Icon name='pencil' /></Button>
+                            <Header as='h4' textAlign='left' >
+                                @{comentario.author}
+                            </Header><Divider />
                             <Header as='h5' textAlign='left'  >
-                                <Header as='h4' textAlign='left' >
-                                    @{comentario.author}
-                                </Header><Divider /><br />
                                 <p>{comentario.body}</p>
                             </Header><br />
                             <Button onClick={() => { this.props.votarComentario(comentario.id, 'upVote'); this.props.novoComentario(true) }} icon inverted color='blue' size='tiny' floated='left' ><Icon name='thumbs up' /></Button>

@@ -1,5 +1,4 @@
-import * as PostsAPI from '../utils/PostsAPI'
-
+import * as Constantes from '../utils/PostsConstantes'
 
 const INITIAL_STATE = {
     novopost: false,
@@ -18,42 +17,30 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case 'muda_category':
+        case Constantes.MUDA_CATEGORY:
             return { ...state, category: action.payload }
-            break
-        case 'muda_title':
+        case Constantes.MUDA_TITLE:
             return { ...state, title: action.payload }
-            break
-        case 'muda_body':
+        case Constantes.MUDA_BODY:
             return { ...state, body: action.payload }
-            break
-        case 'muda_post':
+        case Constantes.MUDA_POST:
             return { ...state, post: action.payload }
-            break
-        case 'post_adicionado':
+        case Constantes.POST_ADICIONADO:
             return { ...state, addpost: action.payload, novopost: !action.payload }
-            break
-        case 'novo_post':
+        case Constantes.NOVO_POST:
             return { ...state, novopost: action.payload }
-            break
-        case 'edit_post':
+        case Constantes.EDIT_POST:
             return { ...state, editpost: action.payload }
-            break
-        case 'muda_valuecategoria':
+        case Constantes.MUDA_VALUECATEGORIA:
             return { ...state, valuecategoria: action.payload }
-            break
-        case 'id_id':
+        case Constantes.ID_ID:
             return { ...state, id: action.payload }
-            break
-        case 'timestamp':
+        case Constantes.TIMESTAMP:
             return { ...state, timestamp: action.payload }
-            break
-        case 'vote':
+        case Constantes.VOTE:
             return { ...state, voteScore: action.payload }
-            break
-        case 'muda_ordem':
+        case Constantes.MUDA_ORDEM:
             return { ...state, ordenar: action.payload }
-            break
         default:
             return state
 

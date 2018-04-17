@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import * as CategoriesAPI from './utils/CategoriesAPI'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducers from './reducers/Reducers'
