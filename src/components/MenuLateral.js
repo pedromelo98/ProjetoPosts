@@ -3,9 +3,9 @@ import '../App.css';
 import * as CategoriesAPI from '../utils/CategoriesAPI'
 import { connect } from 'react-redux'
 import { mudaCategorie } from '../actions/CategoriesActions'
-import { mudaBody, mudaCategory, mudaTitle, addPost, mudaAddPost, mudaEditPost, mudaValueCategoria, mudaOrdenados } from '../actions/PostsActions'
+import { mudaBody, mudaCategory, mudaTitle, addPost, mudaAddPost, mudaEditPost, mudaValueCategoria, mudaOrdenados, mudaPostErro } from '../actions/PostsActions'
 import { renderizaComentarios } from '../actions/ComentariosActions'
-import { Icon, Popup, Button, Divider, Modal, Form, Input, Radio, Header } from 'semantic-ui-react'
+import { Icon, Popup, Button, Divider, Modal, Form, Input, Radio, Header, Message } from 'semantic-ui-react'
 
 
 
@@ -28,6 +28,17 @@ class MenuLateral extends Component {
     handleTaChange = (e, { value }) => this.props.mudaBody(value)
 
     handleTitleChange = (e, { value }) => this.props.mudaTitle(value)
+
+    exibeMenssagemDeErro() {
+        if (this.props.post_erro) {
+            return (
+                <Message negative>
+                    <Message.Header>Erro!</Message.Header>
+                    <p>Todos os campos são obrigatórios!</p>
+                </Message>
+            )
+        }
+    }
 
     render() {
         return (
@@ -59,7 +70,7 @@ class MenuLateral extends Component {
                                 <Divider inverted />
                             </div>
                             <div className="Botoes-menu" >
-                                <Modal open={this.props.addpost} onClose={() => this.props.mudaAddPost(false)} closeIcon
+                                <Modal open={this.props.addpost} onClose={() => { this.props.mudaAddPost(false); this.props.mudaPostErro() }} closeIcon
                                     trigger={
                                         <Popup
                                             position='right center'
@@ -110,7 +121,8 @@ class MenuLateral extends Component {
                                         </Form>
                                     </Modal.Content>
                                     <Modal.Actions>
-                                        <Button onClick={() => this.props.addPost({ edit: this.props.editpost, id: this.props.id, timestamp: this.props.timestamp }, { id: Date.now().toString(), timestamp: Date.now(), title: this.props.title, body: this.props.post_body, author: 'user', category: this.props.value })} icon color='blue' >
+                                        {this.exibeMenssagemDeErro()}
+                                        <Button onClick={() => { this.props.mudaPostErro(); this.props.addPost({ edit: this.props.editpost, id: this.props.id, timestamp: this.props.timestamp }, { id: Date.now().toString(), timestamp: Date.now(), title: this.props.title, body: this.props.post_body, author: 'user', category: this.props.value }) }} icon color='blue' >
                                             <Icon name='arrow right' />
                                         </Button>
                                     </Modal.Actions>
@@ -137,8 +149,9 @@ const mapStateToProps = state => (
         editpost: state.PostsReducer.editpost,
         value: state.PostsReducer.valuecategoria,
         id: state.PostsReducer.id,
-        timestamp: state.PostsReducer.timestamp
+        timestamp: state.PostsReducer.timestamp,
+        post_erro: state.PostsReducer.post_erro
     }
 )
 
-export default connect(mapStateToProps, { mudaBody, mudaCategory, mudaTitle, addPost, mudaCategorie, mudaAddPost, mudaValueCategoria, mudaEditPost, mudaOrdenados, renderizaComentarios })(MenuLateral)
+export default connect(mapStateToProps, { mudaBody, mudaCategory, mudaTitle, addPost, mudaCategorie, mudaAddPost, mudaValueCategoria, mudaEditPost, mudaOrdenados, renderizaComentarios, mudaPostErro })(MenuLateral)

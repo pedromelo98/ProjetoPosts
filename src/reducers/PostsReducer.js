@@ -12,7 +12,8 @@ const INITIAL_STATE = {
     editpost: false,
     valuecategoria: 'Selecione a categoria',
     voteScore: '',
-    ordenar: ''
+    ordenar: '',
+    post_erro: false
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -27,6 +28,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, post: action.payload }
         case Constantes.POST_ADICIONADO:
             return { ...state, addpost: action.payload, novopost: !action.payload }
+            case Constantes.POST_ADICIONADO_ERRO:
+            return { ...state, post_erro: action.payload }
         case Constantes.NOVO_POST:
             return { ...state, novopost: action.payload }
         case Constantes.EDIT_POST:

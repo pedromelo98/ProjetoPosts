@@ -31,11 +31,17 @@ export const mudaPost = (post) => {
     }
 }
 
+export const mudaPostErro = () => {
+    return{
+        type: Constantes.POST_ADICIONADO_ERRO,
+        payload: false
+    }
+}
+
 export const addPost = (editpost, post) => {
     if (post.category === 'Selecione a categoria' || post.title === '' || post.body === '') {
-        alert('Erro, todos os campos são obrigatórios!')
         return {
-            type: Constantes.POST_ADICIONADO,
+            type: Constantes.POST_ADICIONADO_ERRO,
             payload: true
         }
     }
