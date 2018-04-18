@@ -122,7 +122,7 @@ class Principal extends Component {
                         <div className="Flex" >
                             <div className="Comentarios-menu" >
                                 <div className="Comentarios-menu-itens" >
-                                    <Popup
+                                    <Popup size='small'
                                         position='left center'
                                         trigger={<Button onClick={() => this.props.renderizaComentarios(!this.props.visible)} circular icon size='mini' ><Icon color='blue' size='large' name="close" /></Button>}
                                         content='Fechar comentários'
@@ -131,7 +131,7 @@ class Principal extends Component {
                                     <Divider />
                                 </div>
                                 <div className="Comentarios-menu-itens" >
-                                    <Popup
+                                    <Popup size='small'
                                         position='left center'
                                         trigger={<Button onClick={() => { document.getElementById('comentar').scrollIntoView(); this.focus() }} circular icon size='mini' ><Icon color='blue' size='large' name="plus" /></Button>}
                                         content='Adicionar comentário'
@@ -140,25 +140,25 @@ class Principal extends Component {
                                     <Divider />
                                 </div>
                                 <div className="Comentarios-menu-itens" >
-                                    <Popup
+                                    <Popup size='small'
                                         position='left center'
-                                        trigger={<Button onClick={() => this.props.mudaOrdenados('')} circular icon size='mini' ><Icon color='blue' size='large' name="calendar" /></Button>}
-                                        content='Ordenar por mais recentes'
+                                        trigger={<Button onClick={() => this.props.mudaOrdenados('')} circular icon size='mini' ><Icon color='blue' size='large' name="sort content ascending" /></Button>}
+                                        content='Ordenar por recentes'
                                     />
 
                                     <Divider />
                                 </div>
                                 <div className="Comentarios-menu-itens" >
-                                    <Popup
+                                    <Popup size='small'
                                         position='left center'
-                                        trigger={<Button onClick={() => this.props.mudaOrdenados('curtidos')} circular icon size='mini' ><Icon color='blue' size='large' name="like outline" /></Button>}
-                                        content='Ordenar por curtidos'
+                                        trigger={<Button onClick={() => this.props.mudaOrdenados('curtidos')} circular icon size='mini' ><Icon color='blue' size='large' name="sort content descending" /></Button>}
+                                        content='Ordenar por mais curtidos'
                                     />
 
                                     <Divider />
                                 </div>
                             </div>
-                            <div className="Comentarios-conteudo" >
+                            <div className="Comentarios-conteudo" ><br/>
                                 {this.renderizarComentarios()}
                                 <Form>
                                     <TextArea value={this.props.ta} onChange={this.handleTaChange} id='comentar' ref={this.handleRef} placeholder='Adicionar comentário...' />

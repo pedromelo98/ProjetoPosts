@@ -115,7 +115,14 @@ class TodosPosts extends Component {
         return (
             <div className='App' >
                 {this.populaTodosOsPosts()}
-                <Header><br />Home<br /><br /><Header.Subheader>Nesta página você encontrará todos os posts!<br />Para filtrar posts de acordo com seus interesses utilize as opções do menu lateral esquerdo!</Header.Subheader></Header><br /><br />
+                <Header><br />Home<br /><br /><Header.Subheader>Nesta página você encontrará todos os posts!<br />Para filtrar posts de acordo com seus interesses utilize os botões abaixo:</Header.Subheader></Header><br />
+                <Button.Group>
+                    <Button onClick={() => this.props.mudaOrdenados('')} color='blue' size='mini' >Recentes</Button>
+                    <Button.Or text='ou' />
+                    <Button onClick={() => this.props.mudaOrdenados('curtidos')} color='blue' size='mini' >Mais curtidos</Button>
+                    <Button.Or text='ou' />
+                    <Button onClick={() => this.props.mudaOrdenados('comentados')} color='blue' size='mini' >Mais comentados</Button>
+                </Button.Group><br /><br />
                 {this.renderizarTodosPosts()}
             </div>
         )

@@ -37,13 +37,13 @@ class MenuLateral extends Component {
                         <div className="Menu-options-size" >
                             <div>
                                 <Header as='h1' color='blue' >Categorias</Header>
-                            </div><br />
+                            </div><br /><br />
                             <div>
                                 <Button.Group>
                                     <Button primary onClick={() => { this.props.mudaCategorie('react'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >React</Button>
-                                    <Button.Or/>
+                                    <Button.Or text='ou' />
                                     <Button primary onClick={() => { this.props.mudaCategorie('redux'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >Redux</Button>
-                                    <Button.Or/>
+                                    <Button.Or text='ou' />
                                     <Button primary onClick={() => { this.props.mudaCategorie('udacity'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >Udacity</Button>
                                 </Button.Group>
                             </div>
@@ -116,14 +116,6 @@ class MenuLateral extends Component {
                                     </Modal.Actions>
 
                                 </Modal>
-                                <Divider inverted />
-                            </div>
-                            <div className="Botoes-menu" >
-                                        <Button.Group size='small' vertical >
-                                            <Button onClick={() => this.props.mudaOrdenados('')} icon color='blue' size='mini' ><Icon size='large' name="calendar" /></Button>
-                                            <Button onClick={() => this.props.mudaOrdenados('curtidos')} icon color='blue' size='mini' ><Icon size='large' name="like outline" /></Button>
-                                            <Button onClick={() => this.props.mudaOrdenados('comentados')} icon color='blue' size='mini' ><Icon size='large' name="comments outline" /></Button>
-                                        </Button.Group>
                                 <Divider inverted />
                             </div>
                         </div>

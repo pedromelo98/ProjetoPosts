@@ -5,7 +5,7 @@ import * as PostsAPI from '../utils/PostsAPI'
 import { Button, Segment, Divider, Header, Icon, Confirm } from 'semantic-ui-react'
 import { renderizaComentarios, mudaIdDoPai } from '../actions/ComentariosActions'
 import { mudaCategorie } from '../actions/CategoriesActions'
-import { novoPost, mudaAddPost, mudaTitle, mudaBody, mudaValueCategoria, mudaEditPost, mudaId, mudaTime, deletarPost, votarPost } from '../actions/PostsActions'
+import { novoPost, mudaAddPost, mudaTitle, mudaBody, mudaValueCategoria, mudaEditPost, mudaId, mudaTime, deletarPost, votarPost, mudaOrdenados } from '../actions/PostsActions'
 
 
 class ExibeCategoria extends Component {
@@ -117,7 +117,14 @@ class ExibeCategoria extends Component {
         return (
             <div className='App' >
                 {this.popularPosts()}
-                <Header><br />Categoria: {this.props.categorie}<br /><br /><Header.Subheader>Nesta página você encontrará todos os posts da categoria {this.props.categorie}!<br />Para filtrar posts de acordo com seus interesses utilize as opções do menu lateral esquerdo!</Header.Subheader></Header><br /><br />
+                <Header><br />Categoria: {this.props.categorie}<br /><br /><Header.Subheader>Nesta página você encontrará todos os posts da categoria {this.props.categorie}!<br />Para filtrar posts de acordo com seus interesses utilize os botões abaixo:</Header.Subheader></Header><br />
+                <Button.Group>
+                    <Button onClick={() => this.props.mudaOrdenados('')} color='blue' size='mini' >Recentes</Button>
+                    <Button.Or text='ou' />
+                    <Button onClick={() => this.props.mudaOrdenados('curtidos')} color='blue' size='mini' >Mais curtidos</Button>
+                    <Button.Or text='ou' />
+                    <Button onClick={() => this.props.mudaOrdenados('comentados')} color='blue' size='mini' >Mais comentados</Button>
+                </Button.Group><br /><br />
                 {this.renderizarCategoria()}
             </div>
         )
@@ -134,4 +141,4 @@ const mapStateToProps = state => (
     }
 )
 
-export default connect(mapStateToProps, { renderizaComentarios, mudaIdDoPai, mudaCategorie, novoPost, mudaAddPost, mudaTitle, mudaValueCategoria, mudaBody, votarPost, mudaEditPost, mudaId, mudaTime, deletarPost })(ExibeCategoria)
+export default connect(mapStateToProps, { renderizaComentarios, mudaIdDoPai, mudaCategorie, novoPost, mudaAddPost, mudaTitle, mudaValueCategoria, mudaBody, votarPost, mudaEditPost, mudaId, mudaTime, deletarPost, mudaOrdenados })(ExibeCategoria)
