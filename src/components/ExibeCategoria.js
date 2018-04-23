@@ -61,6 +61,33 @@ class ExibeCategoria extends Component {
         }
     }
 
+    desabilitarBotoes(botao) {
+        if (botao === 'curtidos') {
+            switch (this.props.ordenar) {
+                case 'curtidos':
+                    return true
+                default:
+                    return false
+            }
+        }
+        if (botao === 'comentados') {
+            switch (this.props.ordenar) {
+                case 'comentados':
+                    return true
+                default:
+                    return false
+            }
+        }
+        if (botao === 'recentes') {
+            switch (this.props.ordenar) {
+                case '':
+                    return true
+                default:
+                    return false
+            }
+        }
+    }
+
     renderizarCategoria() {
         if (this.state.posts[0]) {
             return (
@@ -119,11 +146,11 @@ class ExibeCategoria extends Component {
                 {this.popularPosts()}
                 <Header><br />Categoria: {this.props.categorie}<br /><br /><Header.Subheader>Nesta página você encontrará todos os posts da categoria {this.props.categorie}!<br />Para filtrar posts de acordo com seus interesses utilize os botões abaixo:</Header.Subheader></Header><br />
                 <Button.Group>
-                    <Button onClick={() => this.props.mudaOrdenados('')} color='blue' size='mini' >Recentes</Button>
+                    <Button disabled={this.desabilitarBotoes('recentes')} onClick={() => this.props.mudaOrdenados('')} color='blue' size='mini' >Recentes</Button>
                     <Button.Or text='ou' />
-                    <Button onClick={() => this.props.mudaOrdenados('curtidos')} color='blue' size='mini' >Mais curtidos</Button>
+                    <Button disabled={this.desabilitarBotoes('curtidos')} onClick={() => this.props.mudaOrdenados('curtidos')} color='blue' size='mini' >Mais curtidos</Button>
                     <Button.Or text='ou' />
-                    <Button onClick={() => this.props.mudaOrdenados('comentados')} color='blue' size='mini' >Mais comentados</Button>
+                    <Button disabled={this.desabilitarBotoes('comentados')} onClick={() => this.props.mudaOrdenados('comentados')} color='blue' size='mini' >Mais comentados</Button>
                 </Button.Group><br /><br />
                 {this.renderizarCategoria()}
             </div>

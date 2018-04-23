@@ -39,6 +39,40 @@ class MenuLateral extends Component {
             )
         }
     }
+    desabilitarBotoes(botao) {
+        if (botao === 'todos') {
+            switch (this.props.categorie) {
+                case '':
+                    return true
+                default:
+                    return false
+            }
+        }
+        if (botao === 'react') {
+            switch (this.props.categorie) {
+                case 'react':
+                    return true
+                default:
+                    return false
+            }
+        }
+        if (botao === 'redux') {
+            switch (this.props.categorie) {
+                case 'redux':
+                    return true
+                default:
+                    return false
+            }
+        }
+        if (botao === 'udacity') {
+            switch (this.props.categorie) {
+                case 'udacity':
+                    return true
+                default:
+                    return false
+            }
+        }
+    }
 
     render() {
         return (
@@ -50,12 +84,11 @@ class MenuLateral extends Component {
                                 <Header as='h1' color='blue' >Categorias</Header>
                             </div><br /><br />
                             <div>
-                                <Button.Group>
-                                    <Button primary onClick={() => { this.props.mudaCategorie('react'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >React</Button>
-                                    <Button.Or text='ou' />
-                                    <Button primary onClick={() => { this.props.mudaCategorie('redux'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >Redux</Button>
-                                    <Button.Or text='ou' />
-                                    <Button primary onClick={() => { this.props.mudaCategorie('udacity'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >Udacity</Button>
+                                <Button.Group vertical >
+                                    <Button disabled={this.desabilitarBotoes('todos')} primary onClick={() => { this.props.mudaCategorie(''); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >Todos os posts</Button>
+                                    <Button disabled={this.desabilitarBotoes('react')} primary onClick={() => { this.props.mudaCategorie('react'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >React</Button>
+                                    <Button disabled={this.desabilitarBotoes('redux')} primary onClick={() => { this.props.mudaCategorie('redux'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >Redux</Button>
+                                    <Button disabled={this.desabilitarBotoes('udacity')} primary onClick={() => { this.props.mudaCategorie('udacity'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >Udacity</Button>
                                 </Button.Group>
                             </div>
                         </div>
@@ -141,6 +174,7 @@ class MenuLateral extends Component {
 const mapStateToProps = state => (
     {
         categories: state.CategoriesReducer.categories,
+        categorie: state.CategoriesReducer.categorie,
         subcategories: state.CategoriesReducer.subcategories,
         post_body: state.PostsReducer.body,
         title: state.PostsReducer.title,
