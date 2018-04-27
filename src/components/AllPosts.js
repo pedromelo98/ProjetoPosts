@@ -113,7 +113,7 @@ class AllPosts extends Component {
         }
     }
 
-    renderizarTodosPosts() {
+    renderAllPosts() {
         if (this.state.posts.length !== 0) {
             return (
                 this.state.posts.slice(0).map((post, a, b) => {
@@ -172,7 +172,7 @@ class AllPosts extends Component {
                     <Button.Or text='ou' />
                     <Button disabled={this.desableButtons('comentados')} onClick={() => this.props.changeOrientation('comentados')} color='blue' size='mini' >Mais comentados</Button>
                 </Button.Group><br /><br />
-                {this.renderizarTodosPosts()}
+                {this.renderAllPosts()}
             </div>
         )
     }

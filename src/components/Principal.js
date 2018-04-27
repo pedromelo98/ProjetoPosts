@@ -8,7 +8,7 @@ import { Switch, Route } from 'react-router-dom'
 
 
 
-class Principal extends Component {
+export default class Principal extends Component {
 
     state = { activeIndex: 0 }
 
@@ -38,11 +38,3 @@ class Principal extends Component {
         );
     }
 }
-
-const mapStateToProps = state => (
-    {
-
-    }
-)
-
-export default connect(mapStateToProps, {})(Principal)
