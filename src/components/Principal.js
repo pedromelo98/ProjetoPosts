@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { connect } from 'react-redux'
-import MenuLateral from './MenuLateral'
-import Categorias from './Categorias'
-import Comentarios from './Comentarios'
+import LeftMenu from './LeftMenu'
+import Categories from './Categories'
+import Comments from './Comments'
+import { Switch, Route } from 'react-router-dom'
+
 
 
 class Principal extends Component {
@@ -17,14 +19,21 @@ class Principal extends Component {
 
         this.setState({ activeIndex: newIndex })
     }
-    
+
 
     render() {
         return (
             <div className="Flex" >
-                <div className="MenuLateral" ><MenuLateral/></div>
-                <div className="Conteudo" ><Categorias/></div>
-                <div className="Comentarios" ><Comentarios/></div>
+                <div className="MenuLateral" ><LeftMenu /></div>
+                <div className="Conteudo" >
+                    <Switch>
+                        <Route exact path="/" render={(pp) => (<Categories docategorie={{ do: false, categorie: '' }} />)} />
+                        <Route exact path="/react" render={(pp) => (<Categories docategorie={{ do: true, categorie: 'react' }} />)} />
+                        <Route exact path="/redux" render={(pp) => (<Categories docategorie={{ do: true, categorie: 'redux' }} />)} />
+                        <Route exact path="/udacity" render={(pp) => (<Categories docategorie={{ do: true, categorie: 'udacity' }} />)} />
+                    </Switch>
+                </div>
+                <div className="Comentarios" ><Comments /></div>
             </div>
         );
     }
@@ -32,7 +41,7 @@ class Principal extends Component {
 
 const mapStateToProps = state => (
     {
-        
+
     }
 )
 

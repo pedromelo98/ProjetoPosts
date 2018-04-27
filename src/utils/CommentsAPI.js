@@ -7,23 +7,23 @@ const headers = {
   'Authorization': token
 }
 
-export const getComentarioPorId = (id) =>
+export const getCommentById = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json())
     .then(comments => comments)
 
-export const addComentario = (comentario) =>
+export const addComment = (comment) =>
   fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(comentario)
+    body: JSON.stringify(comment)
   })
     .then(res => res)
 
-export const votar = (id, option) => {
+export const vote = (id, option) => {
   let voto = { option }
   fetch(`${api}/comments/${id}`, {
     method: 'POST',
@@ -36,7 +36,7 @@ export const votar = (id, option) => {
     .then(res => res)
 }
 
-export const deletarComentario = (id) =>
+export const deleteComment = (id) =>
   fetch(`${api}/comments/${id}`, {
     method: 'DELETE',
     headers: {
@@ -46,13 +46,13 @@ export const deletarComentario = (id) =>
   })
     .then(res => res)
 
-export const editarComentario = (id, comentario) =>
+export const editComment = (id, comment) =>
   fetch(`${api}/comments/${id}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(comentario)
+    body: JSON.stringify(comment)
   })
     .then(res => res)

@@ -2,15 +2,37 @@ import React, { Component } from 'react';
 import '../App.css';
 import * as CategoriesAPI from '../utils/CategoriesAPI'
 import { connect } from 'react-redux'
-import { mudaCategorie } from '../actions/CategoriesActions'
-import { mudaBody, mudaCategory, mudaTitle, addPost, mudaAddPost, mudaEditPost, mudaValueCategoria, mudaOrdenados, mudaPostErro } from '../actions/PostsActions'
-import { renderizaComentarios } from '../actions/ComentariosActions'
-import { Icon, Popup, Button, Divider, Modal, Form, Input, Radio, Header, Message } from 'semantic-ui-react'
+import { changeCategory } from '../actions/CategoriesActions'
+import {
+    changeBody,
+    changeCategorie,
+    changeTitle,
+    addPost,
+    changeAddPost,
+    changeEditPost,
+    changeCategorieValue,
+    changeOrientation,
+    changePostError
+} from '../actions/PostsActions'
+import { renderComments } from '../actions/CommentsActions'
+import {
+    Icon,
+    Popup,
+    Button,
+    Divider,
+    Modal,
+    Form,
+    Input,
+    Radio,
+    Header,
+    Message
+} from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 
 
 
-class MenuLateral extends Component {
+class LeftMenu extends Component {
 
     state = {
         categorie: [],
@@ -23,14 +45,14 @@ class MenuLateral extends Component {
         })
     }
 
-    handleCategoryChange = (e, { value }) => { this.props.mudaCategory(value); this.props.mudaValueCategoria(value) }
+    handleCategoryChange = (e, { value }) => { this.props.changeCategorie(value); this.props.changeCategorieValue(value) }
 
-    handleTaChange = (e, { value }) => this.props.mudaBody(value)
+    handleTaChange = (e, { value }) => this.props.changeBody(value)
 
-    handleTitleChange = (e, { value }) => this.props.mudaTitle(value)
+    handleTitleChange = (e, { value }) => this.props.changeTitle(value)
 
-    exibeMenssagemDeErro() {
-        if (this.props.post_erro) {
+    showErrorMessage() {
+        if (this.props.postError) {
             return (
                 <Message negative>
                     <Message.Header>Erro!</Message.Header>
@@ -39,8 +61,8 @@ class MenuLateral extends Component {
             )
         }
     }
-    desabilitarBotoes(botao) {
-        if (botao === 'todos') {
+    desableButtons(button) {
+        if (button === 'todos') {
             switch (this.props.categorie) {
                 case '':
                     return true
@@ -48,7 +70,7 @@ class MenuLateral extends Component {
                     return false
             }
         }
-        if (botao === 'react') {
+        if (button === 'react') {
             switch (this.props.categorie) {
                 case 'react':
                     return true
@@ -56,7 +78,7 @@ class MenuLateral extends Component {
                     return false
             }
         }
-        if (botao === 'redux') {
+        if (button === 'redux') {
             switch (this.props.categorie) {
                 case 'redux':
                     return true
@@ -64,7 +86,7 @@ class MenuLateral extends Component {
                     return false
             }
         }
-        if (botao === 'udacity') {
+        if (button === 'udacity') {
             switch (this.props.categorie) {
                 case 'udacity':
                     return true
@@ -85,10 +107,10 @@ class MenuLateral extends Component {
                             </div><br /><br />
                             <div>
                                 <Button.Group vertical >
-                                    <Button disabled={this.desabilitarBotoes('todos')} primary onClick={() => { this.props.mudaCategorie(''); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >Todos os posts</Button>
-                                    <Button disabled={this.desabilitarBotoes('react')} primary onClick={() => { this.props.mudaCategorie('react'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >React</Button>
-                                    <Button disabled={this.desabilitarBotoes('redux')} primary onClick={() => { this.props.mudaCategorie('redux'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >Redux</Button>
-                                    <Button disabled={this.desabilitarBotoes('udacity')} primary onClick={() => { this.props.mudaCategorie('udacity'); this.props.mudaOrdenados(''); this.props.renderizaComentarios(false) }} className="SubMenu-options" >Udacity</Button>
+                                    <Link to='/' ><Button disabled={this.desableButtons('todos')} primary onClick={() => { this.props.changeCategory(''); this.props.changeOrientation(''); this.props.renderComments(false) }} className="SubMenu-options" >Todos os posts</Button></Link>
+                                    <Link to='/react'><Button disabled={this.desableButtons('react')} primary onClick={() => { this.props.changeCategory('react'); this.props.changeOrientation(''); this.props.renderComments(false) }} className="SubMenu-options" >React</Button></Link>
+                                    <Link to='/redux' ><Button disabled={this.desableButtons('redux')} primary onClick={() => { this.props.changeCategory('redux'); this.props.changeOrientation(''); this.props.renderComments(false) }} className="SubMenu-options" >Redux</Button></Link>
+                                    <Link to='/udacity' ><Button disabled={this.desableButtons('udacity')} primary onClick={() => { this.props.changeCategory('udacity'); this.props.changeOrientation(''); this.props.renderComments(false) }} className="SubMenu-options" >Udacity</Button></Link>
                                 </Button.Group>
                             </div>
                         </div>
@@ -96,18 +118,18 @@ class MenuLateral extends Component {
                             <div className="Botoes-menu">
                                 <Popup
                                     position='right center'
-                                    trigger={<Button onClick={() => { this.props.mudaCategorie(''); this.props.mudaOrdenados('') }} circular basic icon size='mini' ><Icon color='blue' size='large' name="home" /></Button>}
+                                    trigger={<Button onClick={() => { this.props.changeCategory(''); this.props.changeOrientation('') }} circular basic icon size='mini' ><Icon color='blue' size='large' name="home" /></Button>}
                                     content='Home'
                                     basic
                                 />
                                 <Divider inverted />
                             </div>
                             <div className="Botoes-menu" >
-                                <Modal open={this.props.addpost} onClose={() => { this.props.mudaAddPost(false); this.props.mudaPostErro() }} closeIcon
+                                <Modal open={this.props.addpost} onClose={() => { this.props.changeAddPost(false); this.props.changePostError() }} closeIcon
                                     trigger={
                                         <Popup
                                             position='right center'
-                                            trigger={<Button onClick={() => { this.props.mudaAddPost(true); this.props.mudaBody(''); this.props.mudaTitle(''); this.props.mudaValueCategoria('Selecione a categoria'); this.props.mudaEditPost(false) }} circular basic icon size='mini' ><Icon color='blue' size='large' name="plus" /></Button>}
+                                            trigger={<Button onClick={() => { this.props.changeAddPost(true); this.props.changeBody(''); this.props.changeTitle(''); this.props.changeCategorieValue('Selecione a categoria'); this.props.changeEditPost(false) }} circular basic icon size='mini' ><Icon color='blue' size='large' name="plus" /></Button>}
                                             content='Novo post'
                                             basic
                                         />
@@ -154,8 +176,8 @@ class MenuLateral extends Component {
                                         </Form>
                                     </Modal.Content>
                                     <Modal.Actions>
-                                        {this.exibeMenssagemDeErro()}
-                                        <Button onClick={() => { this.props.mudaPostErro(); this.props.addPost({ edit: this.props.editpost, id: this.props.id, timestamp: this.props.timestamp }, { id: Date.now().toString(), timestamp: Date.now(), title: this.props.title, body: this.props.post_body, author: 'user', category: this.props.value }) }} icon color='blue' >
+                                        {this.showErrorMessage()}
+                                        <Button onClick={() => { this.props.changePostError(); this.props.addPost({ edit: this.props.editpost, id: this.props.id, timestamp: this.props.timestamp }, { id: Date.now().toString(), timestamp: Date.now(), title: this.props.title, body: this.props.post_body, author: 'user', category: this.props.value }) }} icon color='blue' >
                                             <Icon name='arrow right' />
                                         </Button>
                                     </Modal.Actions>
@@ -174,18 +196,32 @@ class MenuLateral extends Component {
 const mapStateToProps = state => (
     {
         categories: state.CategoriesReducer.categories,
-        categorie: state.CategoriesReducer.categorie,
+        categorie: state.CategoriesReducer.category,
         subcategories: state.CategoriesReducer.subcategories,
         post_body: state.PostsReducer.body,
         title: state.PostsReducer.title,
         category: state.PostsReducer.category,
         addpost: state.PostsReducer.addpost,
         editpost: state.PostsReducer.editpost,
-        value: state.PostsReducer.valuecategoria,
+        value: state.PostsReducer.categorieValue,
         id: state.PostsReducer.id,
         timestamp: state.PostsReducer.timestamp,
-        post_erro: state.PostsReducer.post_erro
+        postError: state.PostsReducer.postError
     }
 )
 
-export default connect(mapStateToProps, { mudaBody, mudaCategory, mudaTitle, addPost, mudaCategorie, mudaAddPost, mudaValueCategoria, mudaEditPost, mudaOrdenados, renderizaComentarios, mudaPostErro })(MenuLateral)
+export default connect(
+    mapStateToProps,
+    {
+        changeBody,
+        changeCategory,
+        changeTitle,
+        addPost,
+        changeCategorie,
+        changeAddPost,
+        changeCategorieValue,
+        changeEditPost,
+        changeOrientation,
+        renderComments,
+        changePostError
+    })(LeftMenu)

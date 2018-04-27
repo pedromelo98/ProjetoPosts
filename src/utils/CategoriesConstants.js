@@ -1,0 +1,3 @@
+export const RENDER_CHILD = 'RENDER_SUB'
+export const CHANGE_CATEGORY = 'CHANGE_CATEGORY'
+export const SET_CATEGORIES = 'SET_CATEGORIES'

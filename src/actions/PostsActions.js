@@ -1,39 +1,76 @@
 import * as PostsAPI from '../utils/PostsAPI'
 
-import * as Constantes from '../utils/PostsConstantes'
+import * as Constants from '../utils/PostsConstants'
 
-export const mudaBody = (body) => {
+
+export const getAllPosts = () => {
+
+    return dispatch => {
+        PostsAPI.getAll()
+            .then(posts => getAllSuccess(dispatch, posts))
+    }
+
+}
+
+export const getAllSuccess = (dispatch, posts) => {
+    dispatch(
+        {
+            type: Constants.GET_ALL,
+            payload: posts
+        }
+    )
+}
+
+export const getByCategorie = (categorie) => {
+
+    return dispatch => {
+        PostsAPI.getPostByCategorie(categorie)
+            .then(posts => getByCategorieSuccess(dispatch, posts))
+    }
+
+}
+
+export const getByCategorieSuccess = (dispatch, posts) => {
+    dispatch(
+        {
+            type: Constants.GET_ALL_BY_CATEGORIE,
+            payload: posts
+        }
+    )
+}
+
+export const changeBody = (body) => {
     return {
-        type: Constantes.MUDA_BODY,
+        type: Constants.CHANGE_BODY,
         payload: body
     }
 }
 
-export const mudaTitle = (title) => {
+export const changeTitle = (title) => {
     return {
-        type: Constantes.MUDA_TITLE,
+        type: Constants.CHANGE_TITLE,
         payload: title
     }
 }
 
-export const mudaCategory = (category) => {
+export const changeCategorie = (category) => {
     return {
-        type: Constantes.MUDA_CATEGORY,
+        type: Constants.CHANGE_CATEGORIE,
         payload: category
     }
 }
 
-export const mudaPost = (post) => {
+export const changePost = (post) => {
 
     return {
-        type: Constantes.MUDA_POST,
+        type: Constants.CHANGE_POST,
         payload: post
     }
 }
 
-export const mudaPostErro = () => {
-    return{
-        type: Constantes.POST_ADICIONADO_ERRO,
+export const changePostError = () => {
+    return {
+        type: Constants.POST_NOT_ADDED,
         payload: false
     }
 }
@@ -41,106 +78,115 @@ export const mudaPostErro = () => {
 export const addPost = (editpost, post) => {
     if (post.category === 'Selecione a categoria' || post.title === '' || post.body === '') {
         return {
-            type: Constantes.POST_ADICIONADO_ERRO,
+            type: Constants.POST_NOT_ADDED,
             payload: true
         }
     }
     if (editpost.edit === true) {
 
-        PostsAPI.editarPost(editpost.id, { category: post.category, title: post.title, author: post.author, body: post.body, timestamp: editpost.timestamp })
+        PostsAPI.editPost(editpost.id, { category: post.category, title: post.title, author: post.author, body: post.body, timestamp: editpost.timestamp })
         return {
-            type: Constantes.POST_ADICIONADO,
+            type: Constants.POST_ADDED,
             payload: false
         }
     }
 
     PostsAPI.addPost(post)
     return {
-        type: Constantes.POST_ADICIONADO,
+        type: Constants.POST_ADDED,
         payload: false
     }
 }
 
-export const deletarPost = (id) => {
+export const deletePost = (id) => {
 
-    PostsAPI.deletarPost(id)
+    return dispatch => {
+        PostsAPI.deletePost(id)
+            .then(success => deleteSuccess(dispatch))
+    }
+
+
+}
+
+export const deleteSuccess = (dispatch) => {
+    dispatch(
+        {
+            type: Constants.POST_DELETED,
+            payload: true
+        }
+    )
+}
+
+
+export const votePost = (id, vote) => {
+
+    PostsAPI.vote(id, vote)
 
     return {
-        type: Constantes.POST_DELETADO,
+        type: Constants.NEW_VOTE,
         payload: true
     }
 }
 
-
-export const votarPost = (id, voto) => {
-
-    PostsAPI.votar(id, voto)
+export const changeAddPost = (boolean) => {
 
     return {
-        type: Constantes.NOVO_VOTO,
-        payload: true
-    }
-}
-
-export const mudaAddPost = (boolean) => {
-
-    return {
-        type: Constantes.POST_ADICIONADO,
+        type: Constants.POST_ADDED,
         payload: boolean
     }
 }
 
-export const mudaTime = (timestamp) => {
+export const changeTime = (timestamp) => {
 
     return {
-        type: Constantes.TIMESTAMP,
+        type: Constants.TIMESTAMP,
         payload: timestamp
     }
 }
 
-export const mudaVote = (vote) => {
+export const changeVote = (vote) => {
 
     return {
-        type: Constantes.VOTE,
+        type: Constants.VOTE,
         payload: vote
     }
 }
 
-export const mudaId = (id) => {
+export const changeId = (id) => {
 
     return {
-        type: Constantes.ID_ID,
+        type: Constants.ID_ID,
         payload: id
     }
 }
 
-export const mudaEditPost = (boolean) => {
+export const changeEditPost = (boolean) => {
 
     return {
-        type: Constantes.EDIT_POST,
+        type: Constants.EDIT_POST,
         payload: boolean
     }
 }
 
-export const mudaValueCategoria = (boolean) => {
+export const changeCategorieValue = (boolean) => {
 
     return {
-        type: Constantes.MUDA_VALUECATEGORIA,
+        type: Constants.CHANGE_CATEGORIE_VALUE,
         payload: boolean
     }
 }
 
-export const novoPost = (boolean) => {
+export const newPost = (boolean) => {
 
     return {
-        type: Constantes.NOVO_POST,
+        type: Constants.NEW_POST,
         payload: boolean
     }
 }
 
-export const mudaOrdenados = (ordem) => {
+export const changeOrientation = (orientation) => {
     return {
-        type: Constantes.MUDA_ORDEM,
-        payload: ordem
+        type: Constants.CHANGE_ORIENTATION,
+        payload: orientation
     }
 }

@@ -1,21 +1,23 @@
+import * as Constants from '../utils/CategoriesConstants'
 
-export const renderizaSubCategorie = (boolean) => {
+export const renderChildCategorie = (boolean) => {
     return {
-        type: 'renderiza_sub',
+        type: Constants.RENDER_CHILD,
         payload: boolean
     }
 }
 
-export const mudaCategorie = (texto) => {
+export const changeCategory = (text) => {
     return {
-        type: 'muda_categorie',
-        payload: texto
+        type: Constants.CHANGE_CATEGORY,
+        payload: text
     }
 }
-//Fazer
-export const populaCategories = () => {
+
+
+export const setCategories = () => {
     return {
-        type: 'popula_categorie',
+        type: Constants.SET_CATEGORIES,
         payload: ''
     }
 }
