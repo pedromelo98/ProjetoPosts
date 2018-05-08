@@ -15,13 +15,16 @@ const INITIAL_STATE = {
     categorieValue: 'Selecione a categoria',
     voteScore: '',
     filter: '',
-    postError: false
+    postError: false,
+    postbyid: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case CommentConsts.ADD_COMMENT:
             return { ...state, newpost: true }
+        case Constants.GET_BY_ID:
+            return { ...state, postbyid: action.payload }
         case CommentConsts.NEW_COMMENT:
             return { ...state, newpost: true }
         case Constants.GET_ALL:

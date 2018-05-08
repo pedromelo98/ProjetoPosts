@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { connect } from 'react-redux'
 import LeftMenu from './LeftMenu'
 import Categories from './Categories'
 import Comments from './Comments'
@@ -31,6 +30,9 @@ export default class Principal extends Component {
                         <Route exact path="/react" render={(pp) => (<Categories docategorie={{ do: true, categorie: 'react' }} />)} />
                         <Route exact path="/redux" render={(pp) => (<Categories docategorie={{ do: true, categorie: 'redux' }} />)} />
                         <Route exact path="/udacity" render={(pp) => (<Categories docategorie={{ do: true, categorie: 'udacity' }} />)} />
+                        <Route path="/react/post" render={(pp) => (<Categories utils={pp} docategorie={{ do: true, categorie: 'post' }} />)} />                        
+                        <Route path="/redux/post" render={(pp) => (<Categories utils={pp} docategorie={{ do: true, categorie: 'post' }} />)} />                        
+                        <Route path="/udacity/post" render={(pp) => (<Categories utils={pp} docategorie={{ do: true, categorie: 'post' }} />)} />                        
                     </Switch>
                 </div>
                 <div className="Comentarios" ><Comments /></div>

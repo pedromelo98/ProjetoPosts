@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { changeCategory } from '../actions/CategoriesActions'
 import AllPosts from './AllPosts'
 import ShowCategorie from './ShowCategorie'
+import PostDetails from './PostDetails'
 
 
 
@@ -29,6 +30,8 @@ class Categories extends Component {
         switch (this.state.categorie) {
             case '':
                 return <AllPosts />
+            case 'post':
+            return <PostDetails utils={this.props.utils} />
             default:
                 return <ShowCategorie docategorie={this.state.categorie} />
         }

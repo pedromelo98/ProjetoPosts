@@ -39,6 +39,23 @@ export const getByCategorieSuccess = (dispatch, posts) => {
     )
 }
 
+export const getById = (id) => {
+    return dispatch => {
+        PostsAPI.getPostById(id)
+            .then(post => getByIdSuccess(dispatch, post))
+    }
+
+}
+
+export const getByIdSuccess = (dispatch, post) => {
+    dispatch(
+        {
+            type: Constants.GET_BY_ID,
+            payload: post
+        }
+    )
+}
+
 export const changeBody = (body) => {
     return {
         type: Constants.CHANGE_BODY,
@@ -119,6 +136,18 @@ export const deleteSuccess = (dispatch) => {
 
 
 export const votePost = (id, vote) => {
+
+    // /*A função abaixo desses comentários não tem nenhum retorno ela apenas adiciona um voto para o post no seridor*/ console.log(PostsAPI.vote(id, vote)) /*retorna undefined*/
+    // Acredito que para usar o dispatch eu precise de um retorno assim como o exemplo na correção do código:                                                       |
+    /*export const fetchTodos = () => dispatch => (                                                                                                                 |
+        Api.fetchTodos() //1.Chama a API                                                                                                                            |
+                   \/                                                                                                                                               |
+           .then(todos => dispatch({ //2. Só depois do retorno é que dispara o objeto                                                                               |
+              |    type: RECEIVE_TODOS,                                                                                                                             |
+              |    todos: todos                                                                                                                                     |
+              |______________________________________TypeError: Cannot read property 'then' of undefined____________________________________________________________|
+           })
+     )*/
 
     PostsAPI.vote(id, vote)
 

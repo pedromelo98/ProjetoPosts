@@ -12,6 +12,10 @@ export const getAll = () =>
     .then(res => res.json())
     .then(posts => posts)
 
+export const getPostById = (id) =>
+  fetch(`${api}/posts/${id}/`, { headers })
+    .then(res => res.json())
+    .then(post => post)
 
 export const addPost = (post) =>
   fetch(`${api}/posts`, {

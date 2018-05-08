@@ -2,6 +2,22 @@ import * as CommentsAPI from '../utils/CommentsAPI'
 import * as Constants from '../utils/CommentsConstants'
 
 
+export const getByParentId = (id) => {
+    return dispatch => {
+        CommentsAPI.getCommentById(id)
+            .then(comments => getByParentIdSuccess(dispatch, comments))
+    }
+}
+
+export const getByParentIdSuccess = (dispatch, comments) => {
+    dispatch(
+        {
+            type: Constants.GET_COMMENTS_BY_PARENT,
+            payload: comments
+        }
+    )
+}
+
 export const renderComments = (boolean) => {
     return {
         type: Constants.RENDER_COMMENTS,

@@ -1,6 +1,7 @@
 import * as Constants from '../utils/CommentsConstants'
 
 const INITIAL_STATE = {
+    comments: '',
     visible: false,
     parentId: '',
     ta: '',
@@ -11,6 +12,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case Constants.GET_COMMENTS_BY_PARENT:
+            return { ...state, comments: action.payload }
         case Constants.RENDER_COMMENTS:
             return { ...state, visible: action.payload }
         case Constants.CHANGE_PARENT_ID:
