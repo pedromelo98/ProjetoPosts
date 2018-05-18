@@ -18,11 +18,13 @@ class Categories extends Component {
         }
     }
 
-    componentDidMount(){
-        if(this.props.docategorie.do){
-            this.setState({categorie: this.props.docategorie.categorie})
+    componentDidMount() {
+        if (this.props.docategorie.do) {
+            this.setState({ categorie: this.props.docategorie.categorie })
+            this.props.changeCategory(this.props.docategorie.categorie)
+        } else {
+            this.props.changeCategory('')
         }
-        this.props.changeCategory(this.props.docategorie.categorie)
     }
 
 
@@ -31,7 +33,7 @@ class Categories extends Component {
             case '':
                 return <AllPosts />
             case 'post':
-            return <PostDetails utils={this.props.utils} />
+                return <PostDetails utils={this.props} />
             default:
                 return <ShowCategorie docategorie={this.state.categorie} />
         }

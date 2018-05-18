@@ -1,4 +1,4 @@
-import * as CommentsAPI from '../utils/CommentsAPI'
+import * as CommentsAPI from '../api/CommentsAPI'
 import * as Constants from '../utils/CommentsConstants'
 
 

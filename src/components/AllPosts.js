@@ -35,7 +35,7 @@ class AllPosts extends Component {
 
     state = {
         filter: '',
-        posts: '',
+        posts: [],
         divid: '',
         confirm: false,
         id: ''
@@ -134,7 +134,7 @@ class AllPosts extends Component {
                                     onConfirm={() => { this.props.deletePost(this.state.id); this.setState({ confirm: false }) }}
                                 />
                                 <Button onClick={() => { this.props.changeAddPost(true); this.props.changeTitle(post.title); this.props.changeBody(post.body); this.props.changeCategorieValue(post.category); this.props.changeEditPost(true); this.props.changeId(post.id); this.props.changeTime(post.timestamp) }} basic icon floated='right'><Icon name='pencil' /></Button>
-                                <Link to={`/${post.category}/post/?${post.id}`}><Button onClick={() => { this.props.changeCategory('post'); this.props.renderComments(false) }} basic icon floated='right'><Icon name='browser' /></Button></Link>
+                                <Link to={`/${post.category}/${post.id}`}><Button onClick={() => { this.props.changeCategory('post'); this.props.renderComments(false) }} basic icon floated='right'><Icon name='browser' /></Button></Link>
                                 <Divider clearing />
                                 <Header as='h5' textAlign='left' ><Icon name='user' />@{post.author}:</Header><br />
                                 <Header as='h4' textAlign='left'>

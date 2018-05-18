@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
-import * as CategoriesAPI from '../utils/CategoriesAPI'
 import { connect } from 'react-redux'
-import { changeCategory } from '../actions/CategoriesActions'
+import { changeCategory, getCategories } from '../actions/CategoriesActions'
 import {
     changeBody,
     changeCategorie,
@@ -40,9 +39,8 @@ class LeftMenu extends Component {
     }
 
     componentDidMount() {
-        CategoriesAPI.getAll().then((categories) => {
-            this.setState({ categorie: categories })
-        })
+        this.props.getCategories()
+        this.setState({ categorie: this.props.categories })
     }
 
     handleCategoryChange = (e, { value }) => { this.props.changeCategorie(value); this.props.changeCategorieValue(value) }
@@ -106,6 +104,7 @@ class LeftMenu extends Component {
                                 <Header as='h1' color='blue' >Categorias</Header>
                             </div><br /><br />
                             <div>
+                                
                                 <Button.Group vertical >
                                     <Link to='/' ><Button disabled={this.desableButtons('todos')} primary onClick={() => { this.props.changeCategory(''); this.props.changeOrientation(''); this.props.renderComments(false) }} className="SubMenu-options" >Todos os posts</Button></Link>
                                     <Link to='/react'><Button disabled={this.desableButtons('react')} primary onClick={() => { this.props.changeCategory('react'); this.props.changeOrientation(''); this.props.renderComments(false) }} className="SubMenu-options" >React</Button></Link>
@@ -213,6 +212,7 @@ const mapStateToProps = state => (
 export default connect(
     mapStateToProps,
     {
+        getCategories,
         changeBody,
         changeCategory,
         changeTitle,

@@ -1,4 +1,22 @@
 import * as Constants from '../utils/CategoriesConstants'
+import * as CategoriesAPI from '../api/CategoriesAPI'
+
+
+export const getCategories = () => {
+    return dispatch => {
+        CategoriesAPI.getAll()
+            .then(categories => getAllSuccess(dispatch, categories))
+    }
+}
+
+export const getAllSuccess = (dispatch, categories) => {
+    dispatch(
+        {
+            type: Constants.GET_ALL,
+            payload: categories
+        }
+    )
+}
 
 export const renderChildCategorie = (boolean) => {
     return {

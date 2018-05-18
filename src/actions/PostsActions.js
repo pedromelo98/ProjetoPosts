@@ -1,4 +1,4 @@
-import * as PostsAPI from '../utils/PostsAPI'
+import * as PostsAPI from '../api/PostsAPI'
 
 import * as Constants from '../utils/PostsConstants'
 
